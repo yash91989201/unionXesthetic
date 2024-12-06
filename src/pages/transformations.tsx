@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { NextSeo } from "next-seo";
-import { sanityClient, urlFor } from "config/sanity";
-import { GetServerSideProps } from "next";
+import { sanityClient, urlFor } from "@config/sanity";
+import type { GetServerSideProps } from "next";
 
 interface PageProps {
   allTransformation: TransformationType[];
 }
 
-const transformations = ({ allTransformation }: PageProps) => {
+export default function Transformations({ allTransformation }: PageProps) {
   return (
     <>
       <NextSeo
@@ -16,7 +16,7 @@ const transformations = ({ allTransformation }: PageProps) => {
       />
       <section className="px-3 xs:px-6 sm:px-12">
         <div className="max-w-6xl py-8 mx-auto space-y-10 sm:py-16 sm:space-y-20 ">
-          <h2 className="text-[clamp(24px,8vw,56px)] font-bold text-center italic text-amber-400">
+          <h2 className="text-[clamp(24px,8vw,56px)] font-bold text-center italic text-gray-300">
             Client Transformations
           </h2>
           {/* testimony card */}
@@ -27,7 +27,7 @@ const transformations = ({ allTransformation }: PageProps) => {
                 className="relative w-56 xs:w-64 sm:w-full aspect-square"
               >
                 <Image
-                  src={urlFor(transformation.clientTransformationImage).url()!}
+                  src={urlFor(transformation.clientTransformationImage).url()}
                   alt=""
                   layout="fill"
                 />
@@ -38,9 +38,7 @@ const transformations = ({ allTransformation }: PageProps) => {
       </section>
     </>
   );
-};
-
-export default transformations;
+}
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const query = `
